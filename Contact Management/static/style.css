@@ -1,0 +1,422 @@
+/* General settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background: #172554;
+    color: white;
+    padding: 24px 7%;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    background: #3b82f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header h1 {
+    font-size: 25px;
+}
+
+.header p {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 24px;
+}
+
+/* Welcome section */
+.welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.welcome h2 {
+    font-size: 29px;
+    margin-bottom: 5px;
+}
+
+.welcome p,
+.section-description {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Statistics */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: #dbeafe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.stat-card p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.stat-card h2 {
+    font-size: 25px;
+    color: #1d4ed8;
+}
+
+/* Panels */
+.panel {
+    background: white;
+    padding: 27px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+}
+
+.panel h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.section-description {
+    margin-bottom: 20px;
+}
+
+/* Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.search-form input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 14px;
+    outline: none;
+    background: white;
+    color: #172033;
+}
+
+.form-group input:focus,
+.search-form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+}
+
+.primary:hover {
+    background: #1d4ed8;
+}
+
+.secondary {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.secondary:hover {
+    background: #cbd5e1;
+}
+
+/* Flash messages */
+.alert {
+    padding: 13px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.alert.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.alert.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Search */
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Contact table */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+thead {
+    background: #f8fafc;
+}
+
+th {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: #64748b;
+}
+
+th,
+td {
+    padding: 16px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+td {
+    font-size: 13px;
+    color: #475569;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Contact name and avatar */
+.contact-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #172033;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-weight: bold;
+}
+
+/* Edit and delete actions */
+.actions {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.edit {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.edit:hover {
+    background: #fde68a;
+}
+
+.delete {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.delete:hover {
+    background: #fecaca;
+}
+
+.actions form {
+    margin: 0;
+}
+
+/* Empty contact list */
+.empty {
+    text-align: center;
+    padding: 45px 20px;
+}
+
+.empty-icon {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.empty h3 {
+    color: #334155;
+    margin-bottom: 5px;
+}
+
+.empty p {
+    color: #64748b;
+}
+
+/* Footer */
+footer {
+    background: #172554;
+    color: #cbd5e1;
+    text-align: center;
+    padding: 25px;
+    font-size: 13px;
+}
+
+footer p + p {
+    margin-top: 4px;
+    color: #94a3b8;
+}
+
+/* Mobile responsive design */
+@media (max-width: 700px) {
+    .container {
+        margin: 24px auto;
+        padding: 0 14px;
+    }
+
+    .header {
+        padding: 20px 16px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .welcome {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .welcome h2 {
+        font-size: 25px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .panel {
+        padding: 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .search-form {
+        flex-wrap: wrap;
+    }
+
+    .search-form input {
+        flex-basis: 100%;
+    }
+
+    .actions {
+        flex-wrap: wrap;
+    }
+}

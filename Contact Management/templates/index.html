@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Management System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-content">
+        <div class="logo">CM</div>
+        <div>
+            <h1>Contact Manager</h1>
+            <p>Keep your connections organized.</p>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="welcome">
+        <div>
+            <h2>Your Contacts</h2>
+            <p>Manage your personal contact directory.</p>
+        </div>
+
+        <a href="#contact-form" class="button primary">
+            + Add Contact
+        </a>
+    </section>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <section class="stats">
+        <div class="stat-card">
+            <span class="stat-icon">👥</span>
+            <div>
+                <p>Total Contacts</p>
+                <h2>{{ total_contacts }}</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-icon">🔎</span>
+            <div>
+                <p>Directory</p>
+                <h2>Organized</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel" id="contact-form">
+
+        <h2>
+            {% if editing %}
+                Edit Contact
+            {% else %}
+                Add a New Contact
+            {% endif %}
+        </h2>
+
+        <p class="section-description">
+            Enter the contact details below.
+        </p>
+
+        <form method="POST"
+              action="{% if editing %}{{ url_for('edit_contact', contact_id=editing.id) }}{% else %}{{ url_for('add_contact') }}{% endif %}">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter full name"
+                        maxlength="100"
+                        value="{{ editing.name if editing else '' }}"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter phone number"
+                        maxlength="30"
+                        value="{{ editing.phone if editing else '' }}"
+                        required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter email address (optional)"
+                        maxlength="150"
+                        value="{{ editing.email if editing else '' }}">
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="button primary">
+                    {% if editing %}
+                        Save Changes
+                    {% else %}
+                        Save Contact
+                    {% endif %}
+                </button>
+
+                {% if editing %}
+                    <a href="{{ url_for('home') }}"
+                       class="button secondary">
+                        Cancel
+                    </a>
+                {% else %}
+                    <button type="reset" class="button secondary">
+                        Clear Form
+                    </button>
+                {% endif %}
+            </div>
+
+        </form>
+    </section>
+
+    <section class="panel">
+
+        <div class="section-heading">
+            <div>
+                <h2>Contact Directory</h2>
+                <p class="section-description">
+                    Search and manage your saved contacts.
+                </p>
+            </div>
+        </div>
+
+        <form method="GET" action="{{ url_for('home') }}"
+              class="search-form">
+
+            <input
+                type="search"
+                name="search"
+                placeholder="Search by name, phone or email..."
+                value="{{ search }}">
+
+            <button type="submit" class="button primary">
+                Search
+            </button>
+
+            <a href="{{ url_for('home') }}"
+               class="button secondary">
+                Reset
+            </a>
+        </form>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Contact</th>
+                        <th>Phone Number</th>
+                        <th>Email Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for contact in contacts %}
+                        <tr>
+                            <td>
+                                <div class="contact-name">
+                                    <span class="avatar">
+                                        {{ contact.name[0]|upper }}
+                                    </span>
+
+                                    <strong>{{ contact.name }}</strong>
+                                </div>
+                            </td>
+
+                            <td>{{ contact.phone }}</td>
+
+                            <td>
+                                {{ contact.email or 'Not provided' }}
+                            </td>
+
+                            <td>
+                                <div class="actions">
+
+                                    <a
+                                        href="{{ url_for('edit_contact', contact_id=contact.id) }}"
+                                        class="button edit">
+                                        Edit
+                                    </a>
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('delete_contact', contact_id=contact.id) }}"
+                                        onsubmit="return confirm('Delete this contact?');">
+
+                                        <button type="submit"
+                                                class="button delete">
+                                            Delete
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="empty">
+                                <div class="empty-icon">📇</div>
+                                <h3>No contacts found</h3>
+                                <p>Add a contact or try a different search.</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>Contact Management System</p>
+    <p>Python Programming Internship Project</p>
+</footer>
+
+</body>
+</html>
